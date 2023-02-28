@@ -1,0 +1,115 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: auto;
+    height: 52.65vmax;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    align-content: center;
+    justify-content: center;
+    background-color: aquamarine;
+}
+
+.bar {
+    background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0));
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 100%;
+    display: inline-flex;
+}
+
+.bothome {
+    height: 115px;
+        
+}
+
+.bothome:hover {
+    height: 106px;
+    opacity: 90%;
+}
+
+.form {
+    border-radius: 3%;
+    margin: 40px;
+    background-color: rgba(0, 0, 0, 0.69);
+    min-height: 400px;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    padding: 35px;
+    display: inline-block;
+    
+}
+
+.titleform {
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.campos {
+    color: rgb(255, 255, 255);
+    text-align: right;
+    font-size: large;
+    margin: 5px;
+}
+
+.inputs {
+    border-color: rgba(239, 236, 216, 0.69);
+    border-radius: 4px;
+    width: 120px;
+    font-size: medium;
+    color: rgb(113, 99, 18);
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.buttonSubmit {
+    font-weight: bold;
+    font-size: x-small;
+    padding: 4px;
+    margin: 20px;
+    font-family:'Verdana';
+    background-color: antiquewhite;
+    border-color: #07648f;
+    color: #07648f;
+    border-radius: 5px;
+}
+
+.buttonSubmit:hover {
+    background-color: #FFCC33;
+    border-color: rgb(235, 174, 19);
+    color: rgb(131, 89, 33);
+}
+
+.conpais {
+    display:inline-flex;
+    flex-flow: row;
+}
+
+.mpais {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: large;
+    margin: 5px;
+    font-weight: bold;  
+}
+
+.buttondelete {
+    font-size: x-small;
+    font-weight: bold;
+    background-color: red;
+    border-radius: 100%;
+    border-width: 0ch;
+    height: fit-content;
+    width: fit-content;
+}
+
+.errors {
+    font-size: small;
+    color: red;
+    margin: 3px;
+}

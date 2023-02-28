@@ -1,0 +1,120 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: bisque;
+    width: auto;
+    height: 52.65vmax;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    align-content: center;
+    justify-content: center;
+    display: block;
+}
+
+.barra {
+    background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0));
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 100%;
+    display: inline-flex;
+}
+
+.butthome{
+    height: 115px;
+}
+
+.butthome:hover {
+    height: 106px;
+    opacity: 90%;
+}
+
+.card {
+    border-radius: 3%;
+    margin: 40px;
+    background-color: rgba(248, 248, 248, 0.471);
+    min-height: 500px;
+    width:fit-content;
+    justify-content: center;
+    align-items: center;
+    display:inline-flex;
+    padding-right: 70px;
+}
+
+.withcountry {
+    margin-top: -50px;
+    padding-left: 50px;
+}
+
+.withactivities {
+    width: 200px;
+    margin-left: 70px;
+    border-radius: 3%;
+    margin: 40px;
+    background-color: rgba(255, 255, 255, 0.362);
+    position: relative;
+    left: 50px;
+}
+
+.titulo {
+    color: rgb(58, 76, 90);
+    text-align: center;
+}
+
+.flag {
+    border-radius: 5px;
+    width: 12em;
+    height: 7.5em;
+    margin-bottom: -10px;
+}
+
+.name {
+    color: rgb(9, 57, 154);
+    font-weight: bolder;
+    font-size:xx-large;
+    text-align: center;
+    margin-bottom: -15px;
+}
+
+.continent {
+    color: rgb(9, 57, 154);
+    text-align: center;
+    font-size: large;
+    margin-bottom: -15px;
+}
+
+.id {
+    color: rgb(9, 57, 154);
+    text-align: center;
+}
+
+.detail {
+    color: rgb(58, 76, 90);
+    margin: 4px;
+}
+
+.nameact {
+    color: rgb(9, 57, 154);
+    margin-bottom: 8px;
+}
+
+.createact {
+    font-weight: bold;
+    font-size: x-small;
+    padding: 4px;
+    margin: 20px;
+    font-family:'Verdana';
+    background-color: antiquewhite;
+    border-color: #07648f;
+    color: #07648f;
+    border-radius: 5px;
+}
+
+.createact:hover {
+    background-color: #FFCC33;
+    border-color: rgb(235, 174, 19);
+    color: rgb(131, 89, 33);
+}

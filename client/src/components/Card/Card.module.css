@@ -1,0 +1,51 @@
+.card {
+    border-radius: 3%;
+    background-color: rgba(255, 255, 255, 0.443);
+    height: 250px;
+    width: 270px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.flag {
+    border-radius: 4%;
+    width: 8em;
+    height: 5.5em;
+}
+
+.nombre{
+    color: rgb(9, 57, 154);
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+    margin: 10px 0px -15px 0px ;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.continente {
+    color: rgb(9, 57, 154);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.boton{
+    border-radius: 5px;
+    color:#07648f;
+    background-color: antiquewhite;
+    width: 5em;
+    padding: 3px;
+    border-color: #07648f;
+    font-family: 'Arvo', serif;
+}
+
+.boton:hover {
+    color: antiquewhite;
+    background-color: #07648f;
+    border-color: #07648f;
+    width: 5.2em;
+}

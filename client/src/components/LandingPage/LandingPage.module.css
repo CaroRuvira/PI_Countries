@@ -1,0 +1,51 @@
+
+.landing {
+    display:flex;
+    flex-direction: row;
+    flex:content;
+    /* left: 0;
+    top: 0;
+    height: 100%;
+    z-index: -1; */
+}
+
+.welcome {
+    display: flex;
+    position: relative;
+    bottom: 45%;
+    right: 40%;
+}
+
+.button {
+    display:flex;
+    flex:auto;
+    font-size: 2em;
+    font-weight: 5em;
+    padding-top: 01em;
+    padding-bottom: 0.2em;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+    
+}
+
+.button:hover {
+    background-color: wheat ;
+        color: #000;
+        scale: 105%;
+}
+
+.text {
+    color: rgb(17, 16, 16);
+    position: relative;
+    bottom: 108%;
+    right: 1%;
+    text-align: right;
+    font-size: 50px;
+    font-weight: 900;
+    font-family: 'Arvo', serif;
+}
+
