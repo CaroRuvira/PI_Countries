@@ -4,11 +4,12 @@ import {
     GET_COUNTRY_BY_NAME,
     GET_COUNTRY_DETAIL,
     ADD_ACTIVITY,
-    FILTER_COUNTRIES,
+    FILTER_BY_CONTINENTS,
     ORDER_COUNTRIES_ALF,
     ORDER_COUNTRIES_POP,
     FILTER_BY_ACTIVITIES,
-    GET_COUNTRIES_QUERY
+    GET_COUNTRIES_QUERY,
+
 
 } from './action-types'
 
@@ -18,7 +19,9 @@ const initialState = {
     allCountries : [],
     allActivities: [],
     activities:[],
-    detail:{}
+    detail:{},
+    countriesByActivity:[]
+   
 }
 
 const reducer = (state = initialState, action) => {
@@ -54,7 +57,8 @@ const reducer = (state = initialState, action) => {
                     ...state
                 };
 
-            case FILTER_COUNTRIES:
+            case FILTER_BY_CONTINENTS:
+           
                 const allCountries = state.allCountries;
                 const continentFiltered = action.payload === 'All' 
                 ? allCountries 
@@ -114,18 +118,19 @@ const reducer = (state = initialState, action) => {
                     countries : sortedArrPop
                 };
 
-            case FILTER_BY_ACTIVITIES:
+            case FILTER_BY_ACTIVITIES:                   
+
                 const allCountries2 = state.allCountries;
 
                 const alone = allCountries2.filter((country) => {
-                    return country.Activity.length > 0;
+                    return country.Activities.length > 0;
                 });
 
                 let array = [];
 
                 for (let i = 0; i < alone.length ; i++){
-                    for(let j = 0; j < alone[i].Activity.length; j++){
-                        if (alone[i].Activity[j].name === action.payload){
+                    for(let j = 0; j < alone[i].Activities.length; j++){
+                        if (alone[i].Activities[j].name === action.payload){
                             array.push(alone[i])
                         }
                     }
@@ -143,6 +148,34 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     countries : action.payload
                 }
+
+                // case FILTER_COUNTRIES:
+                //     return {
+                //         ...state,
+                //         countries:action.payload
+                //     }
+                    
+                    
+                    
+                    
+                    
+                    
+                    // const {activity, continent} = action.payload;
+                    // let filteredCountries= state.allCountries;
+                    // if(activity){
+                    //     filteredCountries=filteredCountries.filter(country => 
+                    //         country.Activities.some(act => act.name === activity)
+                    //     );
+                    // }
+                    // if(continent){
+                    //     filteredCountries=filteredCountries.filter(country => 
+                    //         country.continent === continent)
+                    // }
+
+                    // return{
+                    //     ...state,
+                    //     filteredCountries
+                    // }
 
 
                 

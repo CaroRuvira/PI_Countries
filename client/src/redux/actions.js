@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios"
 import {
     GET_ACTIVITIES,
     GET_ALL_COUNTRIES,
@@ -6,12 +6,11 @@ import {
     GET_COUNTRY_DETAIL, 
     ADD_ACTIVITY,
     FILTER_BY_ACTIVITIES,
-    FILTER_COUNTRIES,
+    FILTER_BY_CONTINENTS,
     ORDER_COUNTRIES_ALF,
     ORDER_COUNTRIES_POP,
-    GET_COUNTRIES_QUERY
- 
-} from './action-types';
+    GET_COUNTRIES_QUERY,
+ } from './action-types';
 
 export const getCountries = () => {
     return async function (dispatch) {
@@ -45,12 +44,23 @@ export const getCountries = () => {
     }
  };
 
-export function postActivity(payload) {
- return async function(dispatch){
-    const response = await axios.post("http://localhost:3001/activities", payload)
-    console.log(response);
-    return response
- }
+export const postActivity =(payload) => {
+    console.log(payload)
+    const activity= {
+        name:payload.name,
+        difficulty:payload.difficulty,
+        duration:payload.duration,
+        season:payload.season,
+        countries:payload.countries
+    };
+    try {
+        return async function(){
+            await axios.post('http://localhost:3001/activities', activity)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+ 
 };
 
 export const getActivities = () => {
@@ -69,10 +79,10 @@ export const getActivities = () => {
     }
 };
 
-export const filterByContinents = (payload) =>{
+export const filterByContinents = (continent) =>{
     return{
-        type: FILTER_COUNTRIES,
-        payload
+        type: FILTER_BY_CONTINENTS,
+        payload: continent
     }
 };
 
@@ -106,11 +116,13 @@ export const getCountriesQuery = (name) => {
     };
 }
 
-export const filterByActivity = (activity) => {
+export const filterByActivity = (activityName) => {
+
     return{
-        type: FILTER_BY_ACTIVITIES,
-        payload: activity
+        type:FILTER_BY_ACTIVITIES,
+        payload:activityName
     }
 }
+
 
     

@@ -7,7 +7,8 @@ import{
     orderByName,
     orderByPopulation,
     filterByActivity,
-    getActivities
+    getActivities,
+
 } from '../../redux/actions';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
@@ -19,11 +20,11 @@ const Home = () => {
     const allCountries = useSelector((state) => state.countries);
     const activities = useSelector((state) => state.allActivities);
 
+
     const [order, setOrder] = useState('');
 
     const [currentPage, setCurrentPage] = useState(1);
     let [countriesPerPage, setCountriesPerPage] = useState(10);
-
     const indexOfLastCountry = currentPage * countriesPerPage;
     const indexOfFirtsCountry = indexOfLastCountry - countriesPerPage;
     const currentCountries = allCountries.slice(indexOfFirtsCountry, indexOfLastCountry);
@@ -37,13 +38,16 @@ const Home = () => {
         dispatch(getActivities());
     }, [dispatch])
 
-    const handleFilteredCountries = (event) => {
+    const handleContinentFilter = (event) => {
+        
         dispatch(filterByContinents(event.target.value))
+      
     }
 
     const handleSort = (event) => {
         dispatch(orderByName(event.target.value))
         setCurrentPage(1)
+        
         setOrder(`Ordenado ${event.target.value}`)
     }
 
@@ -54,9 +58,7 @@ const Home = () => {
     }
 
     const handleFilterActivity = (event) => {
-        event.target.value === 'none'
-        ? dispatch(getCountries())
-        : dispatch(filterByActivity(event.target.value))
+      dispatch(filterByActivity(event.target.value))
         setCurrentPage(1)
     }
 
@@ -86,7 +88,7 @@ const Home = () => {
 
                 <div>
                     Buscar por Continentes
-                    <select className = {style.select} onChange={handleFilteredCountries}>
+                    <select className = {style.select} onChange={handleContinentFilter}>
                         <option value ='All'>Todos</option>
                         <option value ='South America'>América del Sur</option>
                         <option value ='North America'>América del Norte</option>
@@ -103,13 +105,16 @@ const Home = () => {
                     Buscar por Actividad
                     {activities.length === 0 
                     ? (<p>No se han creado Actividades</p>)
-                    : (<select className ={style.select} onChange={handleFilterActivity}>
+                    : (<select
+                     className ={style.select} 
+                     onChange={handleFilterActivity}>
                         <option value ='none'></option>
-                        {activities.map((e) => (
-                            <option value = {e.name} key = {e.id}>{e.name}</option>
+                        {activities.map((activity) => (
+                            <option value = {activity.name} key = {activity.id}>{activity.name}</option>
                         ))}
 
-                    </select>)}
+                    </select>
+                    )}
                 </div>
             </div>
 

@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { getCountries, postActivity} from '../../redux/actions';
 import style from './CreateActivity.module.css';
@@ -10,8 +10,9 @@ const validate = (input) => {
     let difficulty = Number(input.difficulty);
     let duration = Number(input.duration);
 
-    if(!input.name) errors.name = 'Es necesario el nombre';
-    else if(/[^A-Za-z0-9 ]+/g.test(input.name)) errors.name = 'El nombre no puede contener caracteres especiales ni tildes' // may, min,num,  no carac.espec, tildes 
+    if(!input.name) errors.name = 'Campo necesario';
+    else if(/[^A-Za-z0-9 ]+/g.test(input.name)) 
+    errors.name = 'El nombre no puede contener caracteres especiales ni tildes' // may, min,num,  no carac.espec, tildes 
      
     if (!input.difficulty) errors.difficulty = 'Campo necesario'
     else if (difficulty <= 0 || difficulty > 5) errors.difficulty = 'La dificultad debe ser un número entre 1 y 5';
@@ -32,13 +33,14 @@ const validate = (input) => {
  const CreateActivity = () => {
     const dispatch = useDispatch();
     const countries = useSelector((state) => state.countries);
+    const history = useHistory();
     const [errors, setErrors] = useState({});
 
     const [input, setInput] = useState({
-        name: '',
-        difficulty: '',
-        duration: '',
-        season: '',
+        name: "",
+        difficulty: "",
+        duration: "",
+        season: "",
         countries: []
     });
 
@@ -55,7 +57,7 @@ const validate = (input) => {
         setErrors(
             validate({
                 ...input,
-                [event.target.name] : event.targent.value
+                [event.target.name] : event.target.value
             })
         );
         console.log(input)
@@ -92,17 +94,18 @@ const validate = (input) => {
         console.log(input);
         if(!input.name || !input.difficulty || !input.duration || !input.season || !input.countries){
             return alert ('Por favor complete el formulario antes de enviarlo')
-        }
-
+        }else{
         dispatch(postActivity(input));
         alert ('Actividad creada');
         setInput({
-            name: '',
-            difficulty : '',
-            duration:'',
-            season : '',
+            name: "",
+            difficulty : "",
+            duration:"",
+            season : "",
             countries :[]
         })
+        history.push("/home")
+    }
     }
 
 
@@ -112,21 +115,36 @@ const validate = (input) => {
             countries : input.countries.filter((el) => el !== event)
         })
     }
+    function handleClick(event) {
+        event.preventDefault();
+        history.push("/home");
+      }
+    
+      useEffect(() => {
+        dispatch(getCountries());
+      }, [dispatch]);
 
 
     return (
         <div className ={style.container}>
             <div className={style.bar}>
                 <Link to= '/home'>
-                    <button className={style.bothome}> Home </button>
+                    <button className={style.bothome} onChange={handleClick}>Home</button>
                 </Link>
             </div>
             <div className = {style.form}>
-                <h2 classNamw ={style.titleform}>Agrega una actividad</h2>
+                <h2 className ={style.titleform}>Agrega una actividad</h2>
                 <form onSubmit = {handleSubmit}>
                     <div>               
                         <label className={style.campos}>Nombre: </label>
-                        <input className={style.inputs} type='text' value={input.name} name ='name' onChange={handleChange}/>
+                        <input 
+                        className={style.inputs} 
+                        type="text"
+                        placeholder='Escribe un nombre...'
+                        value={input.name} 
+                        name ="name" 
+                        onChange={handleChange}>
+                            </input>
                         {errors.name&& <p className={style.errors}>{errors.name}</p>}
                     </div> 
 
@@ -134,13 +152,15 @@ const validate = (input) => {
                         <label className={style.campos}>País</label>
                         <select 
                         className={style.inputs} 
-                        name='countries' 
-                        id='countries' 
+                        name="countries"
+                        id="countries"
                         onChange={handleSelect}>
-                        <option></option>
-                        {countries.map((el) => (
-                            <option value={el.id}>{el.name}</option>
+                        {/* <option></option> */}
+                        <option value="" disabled selected>Selecciona un país...</option>
+                        {countries.sort((a, b) => a.name.localeCompare(b.name)).map((el) => (
+                            <option value={el.name}>{el.name}</option>
                         ))}
+                        
                         </select>
                         {errors.countries && <p className ={style.errors}>{errors.countries}</p>}
 
@@ -150,39 +170,47 @@ const validate = (input) => {
                         <label className ={style.campos}>Temporada: </label>
                         <select
                         className = {style.inputs}
-                        name = 'season'
-                        id = 'season'
+                        name = "season"
+                        id = "season"
+                        placeholder='Selecciona una temporada...'
+                        value={input.season}
                         onChange = {handleSelect}>
-                            <option value= 'vacio'></option>
-                            <option value= {'Summer'}>Verano</option>
-                            <option value = {'Winter'}>Invierno</option>
-                            <option value = {'Autumn'}>Otoño</option>
-                            <option value = {'Spring'}>Primavera</option>
+                            <option value="" disabled selected>Selecciona una temporada...</option>
+                         
+                            <option value= {"Summer"}>Verano</option>
+                            <option value = {"Winter"}>Invierno</option>
+                            <option value = {"Autumn"}>Otoño</option>
+                            <option value = {"Spring"}>Primavera</option>
                         </select>
                         {errors.season && <p className={style.errors}>{errors.season}</p>}
                     </div>
 
                     <div>
                         <label className = {style.campos}>Dificultad: </label>
+                     
                         <input
                         className={style.inputs}
-                        type = 'number'
-                        value={input.duration}
-                        name='duration'
-                        onChange={handleChange} />
+                        type = "number"
+                        value={input.difficulty}
+                        name="difficulty"
+                        placeholder='Selecciona la dificultad...'
+                        onChange={handleChange}>
+                        </input>
                         {errors.difficulty && <p className={style.errors}>{errors.difficulty}</p>}
                        
                     </div>
 
                     <div>
                         <label className={style.campos}>Duración: </label>
+                   
                         <input
                         className={style.inputs}
-                        type = 'number'
+                        type = "number"
                         value = {input.duration}
-                        name = 'duration'
-                        onChange={handleChange}
-                        />
+                        name = "duration"
+                        placeholder='Selecciona la duración...'
+                        onChange={handleChange}>
+                        </input>
                         <label className={style.campos}> horas</label>
                         {errors.duration && <p className={style.errors}>{errors.duration}</p>}
                     </div>
@@ -190,18 +218,28 @@ const validate = (input) => {
                     <div>
                         <button
                         className ={style.buttonSubmit}
-                        type= 'submit'
-                        disabled={Object.keys(errors).length === 0 ? false : true}>Añadir Actividad</button>
+                        type= "submit"
+                        >Añadir Actividad</button>
                     </div>                  
 
                 </form>
 
-                {input.countries.map((e)=> (
+                {input.countries.map((el)=> (
                     <div className={style.conpais}>
-                        <p className={style.mpais}>{e}</p>
+                        <p className={style.mpais}>
+                        <img src={(countries.find(c => c.name === el)).flag} className={style.flag}></img>
+                        <hr className={style.jump}></hr>
+                       {el}
+                        </p>
+                        <hr className={style.jump}></hr>
                         <button 
-                        classNAme={style.buttonDelete}
-                        onClick= {handleDelete}> X {''}</button>
+                        className={style.buttonDelete}
+                        onClick= {()=> handleDelete(el)}> X{''}
+                         
+                        </button>
+                        {/* <img src={(countries.find(c => c.name === el)).flag} className={style.flag}></img> */}
+                       
+                        {/* <img>{(countries.find((country) => country.name === el).flag )}</img> */}
 
                     </div>
                 ))}

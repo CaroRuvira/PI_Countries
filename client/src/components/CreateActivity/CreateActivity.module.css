@@ -1,16 +1,25 @@
-html, body {
+ body {
+    height: 100%;
+    width: 100%;
+    background-image: url('C:\Users\Usuario\Desktop\CURSOS\HENRY\PI-Countries-main\client\src\components\Images\Landing.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
 
 .container {
     width: auto;
-    height: 52.65vmax;
+    height: 100vmax;
     background-repeat: no-repeat;
     background-position-x: center;
     align-content: center;
     justify-content: center;
-    background-color: aquamarine;
+    /* background-image: url('C:\Users\Usuario\Desktop\CURSOS\HENRY\PI-Countries-main\client\src\components\Images\Landing.png'); */
+    /* background-color: #456990; */
 }
 
 .bar {
@@ -23,25 +32,30 @@ html, body {
 }
 
 .bothome {
-    height: 115px;
+    height: 50px;
+    border-radius: 100%;
+    background-color:#028090 ;
+    cursor: grab;
         
 }
 
 .bothome:hover {
-    height: 106px;
-    opacity: 90%;
+    height:70px
 }
 
 .form {
     border-radius: 3%;
-    margin: 40px;
-    background-color: rgba(0, 0, 0, 0.69);
-    min-height: 400px;
+    margin: 0.5px;
+    background-color: rgba(132, 123, 123, 0.69);
+    margin-left: 150px;
+    margin-right: 150px;
+    /* min-height: 400px;
     width: fit-content;
     justify-content: center;
     align-items: center;
     padding: 35px;
-    display: inline-block;
+    display: flex;
+    flex-direction: row; */
     
 }
 
@@ -60,9 +74,9 @@ html, body {
 .inputs {
     border-color: rgba(239, 236, 216, 0.69);
     border-radius: 4px;
-    width: 120px;
+    width: 250px;
     font-size: medium;
-    color: rgb(113, 99, 18);
+    color: rgb(7, 7, 7);
     margin-top: 5px;
     margin-bottom: 8px;
 }
@@ -96,12 +110,19 @@ html, body {
     font-size: large;
     margin: 5px;
     font-weight: bold;  
+
 }
 
-.buttondelete {
+.buttonDelete {
+    display:flex;
+    height: 20px;
+    font-size: x-small;
+    justify-content: end;
+   
+    justify-content: center;
     font-size: x-small;
     font-weight: bold;
-    background-color: red;
+    background-color: rgb(212, 191, 191);
     border-radius: 100%;
     border-width: 0ch;
     height: fit-content;
@@ -113,3 +134,17 @@ html, body {
     color: red;
     margin: 3px;
 }
+.flag{
+    height: 50px;
+
+}
+
+.jump{
+    
+        border: none;
+        height: 1px;
+        margin: 1px 0;
+        background-color: transparent;
+      }
+      
+    

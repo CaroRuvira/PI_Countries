@@ -23,7 +23,7 @@ const CountryDetail = (props) => {
             </div>
 
             <div className={style.card}>
-                <div clssName={style.withcountry}>
+                <div className={style.withcountry}>
                     <h2 className= {style.titulo}> Más información sobre el país </h2>
                     {
                         country ?
@@ -31,7 +31,7 @@ const CountryDetail = (props) => {
                             <img className ={style.flag} src ={country.flag} alt ='No se pudo cargar la imagen'></img>
                             <h2 className={style.name}>{country.name}</h2>
                             <h4 className={style.continent}>{country.continent}</h4>
-                            <h4 className={style.id}>{}country.id</h4>
+                            <h4 className={style.id}>{country.id}</h4>
                             <h4 className={style.detail}>Capital : {country.capital}</h4>
                             <h4 className={style.detail}>Sub Región : {country.subregion}</h4>
                             <h4 className={style.detail}>Área: {country.area}</h4>
@@ -44,8 +44,8 @@ const CountryDetail = (props) => {
                 <div className = {style.withactivities}>
                     <h3 className={style.titulo}>Actividades para realizar en el país</h3>
                     {
-                        country.Activity && country.Activity.length ? 
-                            country.Activity.map(e => {
+                        country.Activities && country.Activities.length ? 
+                            country.Activities.map(e => {
                             return (
                                 <div>
                                     <h4 className={style.nameact}>{e.name}</h4>
@@ -58,7 +58,8 @@ const CountryDetail = (props) => {
                         })
                         : <p> No existen actividades para este país</p>
                     }
-                    <Link to = '/activities'><button className={style.createact}>Crear Actividad</button></Link>
+                    {/* <Link to = "/activities"><button className={style.createact}>Crear Actividad</button></Link> */}
+
 
                 </div>
 
