@@ -7,7 +7,7 @@
     align-content: center;
 }
 
-.buttHome {
+/* .buttHome {
     height: 30px;
     border-radius: 100px;
 }
@@ -15,7 +15,7 @@
 .buttHome:hover {
     height: 99px;
     opacity: 90%;
-}
+} */
 
 .buttActiv {
     justify-content: center;
