@@ -19,9 +19,19 @@ const Home = () => {
     const dispatch = useDispatch();
     const allCountries = useSelector((state) => state.countries);
     const activities = useSelector((state) => state.allActivities);
-
-
     const [order, setOrder] = useState('');
+    const[filters, setFilters] = useState({
+        continent:"",
+        population:"",
+        name:"",
+        activity:""
+    })
+    const[initialFilters, setInitialFilters] = useState({
+        continent:"",
+        population:"",
+        name:"",
+        activity:""
+    })
 
     const [currentPage, setCurrentPage] = useState(1);
     let [countriesPerPage, setCountriesPerPage] = useState(10);
@@ -41,12 +51,14 @@ const Home = () => {
     const handleContinentFilter = (event) => {
         
         dispatch(filterByContinents(event.target.value))
+        setFilters(event.target.value)
       
     }
 
     const handleSort = (event) => {
         dispatch(orderByName(event.target.value))
         setCurrentPage(1)
+        setFilters(event.target.value)
         
         setOrder(`Ordenado ${event.target.value}`)
     }
@@ -54,12 +66,22 @@ const Home = () => {
     const handleSortPopulation = (event) => {
         dispatch(orderByPopulation(event.target.value))
         setCurrentPage(1)
+        setFilters(event.target.value)
         setOrder(`Ordenado ${event.target.value}`)
     }
 
     const handleFilterActivity = (event) => {
       dispatch(filterByActivity(event.target.value))
         setCurrentPage(1)
+        setFilters(event.target.value)
+    }
+
+    const resetFilters = () => {
+        setFilters(initialFilters)
+        dispatch(getCountries());
+        setCurrentPage(1);
+        setOrder('')
+      
     }
 
     return (
@@ -71,15 +93,15 @@ const Home = () => {
             <div className ={style.filters}>
                 <div>
                     Orden Alfabético
-                    <select className = {style.select} onChange={handleSort}>
+                    <select className = {style.select} onChange={handleSort} value ={filters.name}>
                         <option></option>
-                        <option value = 'asc'>Ascendente</option>
-                        <option value = 'desc'>Descendente</option>
+                        <option value = 'asc'>A-Z</option>
+                        <option value = 'desc'>Z-A</option>
                     </select>
                 </div>
                 <div>
                     Número de habitantes
-                    <select className ={style.select} onChange={handleSortPopulation}>
+                    <select className ={style.select} onChange={handleSortPopulation} value ={filters.population}>
                         <option></option>
                         <option value='bigPop'>Menor a Mayor</option>
                         <option value = 'smallPop'>Mayor a Menor</option>
@@ -88,7 +110,7 @@ const Home = () => {
 
                 <div>
                     Buscar por Continentes
-                    <select className = {style.select} onChange={handleContinentFilter}>
+                    <select className = {style.select} onChange={handleContinentFilter} value={filters.continent}>
                         <option value ='All'>Todos</option>
                         <option value ='South America'>América del Sur</option>
                         <option value ='North America'>América del Norte</option>
@@ -107,7 +129,8 @@ const Home = () => {
                     ? (<p>No se han creado Actividades</p>)
                     : (<select
                      className ={style.select} 
-                     onChange={handleFilterActivity}>
+                     onChange={handleFilterActivity}
+                     value={filters.activity}>
                         <option value ='none'></option>
                         {activities.map((activity) => (
                             <option value = {activity.name} key = {activity.id}>{activity.name}</option>
@@ -115,6 +138,9 @@ const Home = () => {
 
                     </select>
                     )}
+                </div>
+                <div className={style.reset}>
+                    <button className={style.buttRes} onClick = {resetFilters}>Clear Filters</button>
                 </div>
             </div>
 
@@ -144,6 +170,7 @@ const Home = () => {
             countriesPerPage={countriesPerPage}
             allCountries={allCountries.length}
             paginado = {paginado}
+            currentPage={currentPage}
             />
 
         </div>

@@ -8,6 +8,7 @@
     align-content: center;
     flex-direction: column;
     margin: 15px;
+    font-family: 'Arvo', serif;
 }
 
 .flag {
@@ -24,6 +25,7 @@
     margin: 10px 0px -15px 0px ;
     text-overflow: ellipsis;
     overflow: hidden;
+    font-family: 'Arvo', serif;
     white-space: nowrap;
 }
 
@@ -31,6 +33,7 @@
     color: rgb(9, 57, 154);
     text-align: center;
     margin-bottom: 15px;
+    font-family: 'Arvo', serif;
 }
 
 .boton{

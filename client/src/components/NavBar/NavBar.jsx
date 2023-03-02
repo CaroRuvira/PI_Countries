@@ -19,9 +19,7 @@ const NavBar = ({setCurrentPage}) => {
 
     return (
         <div className = {style.navbar}>
-          <Link to = '/home'>
-            <button className={style.buttHome}>Home</button>
-          </Link>
+         
 
           <div className = {style.containerSearch}>
             <div className ={style.search}>

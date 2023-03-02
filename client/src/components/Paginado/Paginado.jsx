@@ -1,7 +1,7 @@
 import React from "react";
 import style from './Paginado.module.css';
 
-const Paginado = ({countriesPerPage, allCountries, paginado}) => {
+const Paginado = ({countriesPerPage, allCountries, paginado, currentPage}) => {
     const pageNumbers = []
 
     for(let i = 1; i <= Math.ceil(allCountries/countriesPerPage); i++){
@@ -13,10 +13,12 @@ const Paginado = ({countriesPerPage, allCountries, paginado}) => {
             <ul>
                 { 
                     pageNumbers && pageNumbers.map(number => (
-                        <button 
-                        className = {style.buttonPag}
+                      
+                        <button
+                        className = {`${style.buttonPag} ${currentPage === number ? style.active : ''}`}
                         key={number}
                         onClick = {() => paginado(number)}>{number}</button>
+                        
                     ))
                 }
             </ul>

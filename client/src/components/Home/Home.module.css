@@ -29,11 +29,25 @@
     border-color: #07648f;
     padding: 3px;
     margin: 5px;
+    font-weight: bold;
+    font-family: 'Arvo', serif;
 }
 
 .paginado {
-    display: flex;
-    justify-content: center;
+
+    display:flex;
+    justify-content:center;
     margin: 0px;
     padding: 2px;
+}
+.buttRes{
+    border-radius: 5px;
+    border-color: #07648f;
+    padding: 3px;
+    margin: 5px;
+}
+
+.buttRes:hover {
+    size:10px;
+    background-color: #777396;
 }

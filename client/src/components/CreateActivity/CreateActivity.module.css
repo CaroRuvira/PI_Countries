@@ -10,6 +10,10 @@
     margin: 0;
     padding: 0;
 }
+html{
+    
+font-family: 'Roboto', sans-serif;
+}
 
 .container {
     width: auto;
@@ -49,6 +53,8 @@
     background-color: rgba(132, 123, 123, 0.69);
     margin-left: 150px;
     margin-right: 150px;
+  
+    font-family: 'Roboto', sans-serif;
     /* min-height: 400px;
     width: fit-content;
     justify-content: center;
@@ -69,6 +75,8 @@
     text-align: right;
     font-size: large;
     margin: 5px;
+    
+font-family: 'Roboto', sans-serif;
 }
 
 .inputs {

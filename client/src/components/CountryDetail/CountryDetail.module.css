@@ -38,7 +38,8 @@
     height: 50px;
     border-radius: 5rem;
     background-color: #456990;
-    cursor:grab
+    cursor:grab;
+    font-family: 'Arvo', serif;
 }
 
 .butthome:hover {
@@ -56,11 +57,13 @@
     align-items: center;
     display:inline-flex;
     padding-right: 70px;
+    font-family: 'Arvo', serif;
 }
 
 .withcountry {
     margin-top: -50px;
     padding-left: 50px;
+    font-family: 'Arvo', serif;
 }
 
 .withactivities {
@@ -71,11 +74,14 @@
     background-color: rgba(255, 255, 255, 0.362);
     position: relative;
     left: 50px;
+    font-family: 'Arvo', serif;
 }
 
 .titulo {
     color: rgb(58, 76, 90);
     text-align: center;
+    font-family: 'Arvo', serif;
+    font-weight: bold;
 }
 
 .flag {
@@ -91,6 +97,7 @@
     font-size:xx-large;
     text-align: center;
     margin-bottom: -15px;
+    font-family: 'Arvo', serif;
 }
 
 .continent {
@@ -98,21 +105,25 @@
     text-align: center;
     font-size: large;
     margin-bottom: -15px;
+    font-family: 'Arvo', serif;
 }
 
 .id {
     color: rgb(9, 57, 154);
     text-align: center;
+    font-family: 'Arvo', serif;
 }
 
 .detail {
     color: rgb(58, 76, 90);
     margin: 4px;
+    font-family: 'Arvo', serif;
 }
 
 .nameact {
     color: rgb(9, 57, 154);
     margin-bottom: 8px;
+    font-family: 'Arvo', serif;
 }
 
 .createact {
@@ -125,6 +136,7 @@
     border-color: #07648f;
     color: #07648f;
     border-radius: 5px;
+    font-family: 'Arvo', serif;
 }
 
 .createact:hover {
