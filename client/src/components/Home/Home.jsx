@@ -16,9 +16,9 @@ import NavBar from '../NavBar/NavBar';
 import style from './Home.module.css';
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const allCountries = useSelector((state) => state.countries);
-    const activities = useSelector((state) => state.allActivities);
+    const dispatch = useDispatch(); // para ir despachando mis acciones
+    const allCountries = useSelector((state) => state.countries); // trae del reducer el state countries
+    const activities = useSelector((state) => state.allActivities); //trae del reducer el state allActivities
     const [order, setOrder] = useState('');
     const[filters, setFilters] = useState({
         continent:"",
@@ -33,25 +33,25 @@ const Home = () => {
         activity:""
     })
 
-    const [currentPage, setCurrentPage] = useState(1);
-    let [countriesPerPage, setCountriesPerPage] = useState(10);
-    const indexOfLastCountry = currentPage * countriesPerPage;
-    const indexOfFirtsCountry = indexOfLastCountry - countriesPerPage;
-    const currentCountries = allCountries.slice(indexOfFirtsCountry, indexOfLastCountry);
-
-    const paginado = (pageNumber) => {
-        setCurrentPage(pageNumber)
+    const [currentPage, setCurrentPage] = useState(1); // state con pag actual, y que me setea la pag actual
+    const [countriesPerPage, setCountriesPerPage] = useState(10); // state cuántos por pág
+    const indexOfLastCountry = currentPage * countriesPerPage; //const es el indice del ultimo country que tengo en la página
+    const indexOfFirtsCountry = indexOfLastCountry - countriesPerPage; // indice del primer personaje 
+    const currentCountries = allCountries.slice(indexOfFirtsCountry, indexOfLastCountry); // countries que estan en la current page, desde el 1 count hasta el ult count
+                                                         
+    const paginado = (pageNumber) => { //declaro una const paginado, le paso un numero de pagina, y
+        setCurrentPage(pageNumber)     //seteo la pag actual con ese num de pag
     };
 
     useEffect(() => {
-        dispatch(getCountries());
+        dispatch(getCountries()); // despacho la action
         dispatch(getActivities());
     }, [dispatch])
 
     const handleContinentFilter = (event) => {
         
         dispatch(filterByContinents(event.target.value))
-        setFilters(event.target.value)
+        setFilters(event.target.value);
       
     }
 
@@ -79,6 +79,7 @@ const Home = () => {
     const resetFilters = () => {
         setFilters(initialFilters)
         dispatch(getCountries());
+        setFilters(initialFilters)
         setCurrentPage(1);
         setOrder('')
       
@@ -94,7 +95,7 @@ const Home = () => {
                 <div>
                     Orden Alfabético
                     <select className = {style.select} onChange={handleSort} value ={filters.name}>
-                        <option></option>
+                        <option value ='None'> </option>
                         <option value = 'asc'>A-Z</option>
                         <option value = 'desc'>Z-A</option>
                     </select>
@@ -131,7 +132,7 @@ const Home = () => {
                      className ={style.select} 
                      onChange={handleFilterActivity}
                      value={filters.activity}>
-                        <option value ='none'></option>
+                        <option value ='All'></option>
                         {activities.map((activity) => (
                             <option value = {activity.name} key = {activity.id}>{activity.name}</option>
                         ))}
@@ -140,13 +141,15 @@ const Home = () => {
                     )}
                 </div>
                 <div className={style.reset}>
+                    
                     <button className={style.buttRes} onClick = {resetFilters}>Clear Filters</button>
+                 
                 </div>
             </div>
 
             <div className={style.containerCards}>
-                {currentCountries.length ? (
-                    currentCountries.map((country) =>{
+                {currentCountries.length ? (       // si hay paises 
+                    currentCountries.map((country) =>{   //les hago un map para recorrer el array
                         return (
                             <div className ={style.card}>
                                 <Card 

@@ -21,8 +21,8 @@ const server = require('./src/app.js');
 const { sequelize } = require('./src/db.js');
 
 // Syncing all the models at once.
-sequelize.sync({ force: true }).then(() => {
-  console.log('Databse connected')
+sequelize.sync({ force: false }).then(() => {
+  console.log('Database connected')
   server.listen(3001, () => {
     console.log('Listening at 3001'); // eslint-disable-line no-console
   });

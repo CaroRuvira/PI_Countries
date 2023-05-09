@@ -15,12 +15,13 @@ import {
 
 
 const initialState = {
-    countries : [],
-    allCountries : [],
-    allActivities: [],
-    activities:[],
+    countries : [],  // se va modificando
+    allCountries : [], // no se modifica
+    allActivities: [], // no se modifica
+    activities:[], // se va modificando
     detail:{},
-    countriesByActivity:[]
+    filterActivity:'All',
+    filterContinent: 'All'
    
 }
 
@@ -49,6 +50,7 @@ const reducer = (state = initialState, action) => {
             case GET_ACTIVITIES:
                 return{
                     ...state,
+                    activities:action.payload,
                     allActivities: action.payload
                 };
 
@@ -60,12 +62,18 @@ const reducer = (state = initialState, action) => {
             case FILTER_BY_CONTINENTS:
            
                 const allCountries = state.allCountries;
-                const continentFiltered = action.payload === 'All' 
+                let continentFiltered = action.payload === 'All' 
                 ? allCountries 
                 : allCountries.filter((e) => e.continent === action.payload)
+
+                if(state.filterActivity !== 'All'){
+                    continentFiltered= continentFiltered.filter((e) => 
+                    e.Activities.find(a => a.name === state.filterActivity))
+                }
                 return{
                     ...state,
-                    countries: continentFiltered
+                    countries: continentFiltered,
+                    filterContinent : action.payload
                 };
 
             case ORDER_COUNTRIES_ALF :
@@ -120,28 +128,21 @@ const reducer = (state = initialState, action) => {
 
             case FILTER_BY_ACTIVITIES:                   
 
-                const allCountries2 = state.allCountries;
+                let countriesActivities = state.allCountries;
 
-                const alone = allCountries2.filter((country) => {
-                    return country.Activities.length > 0;
-                });
-
-                let array = [];
-
-                for (let i = 0; i < alone.length ; i++){
-                    for(let j = 0; j < alone[i].Activities.length; j++){
-                        if (alone[i].Activities[j].name === action.payload){
-                            array.push(alone[i])
-                        }
-                    }
+                if(state.filterContinent !== 'All'){
+                    countriesActivities = countriesActivities.filter(e => e.continent === state.filterContinent)
                 }
 
-                const filter = action.payload === 'All' ? allCountries2 : array;
-
-                return {
-                    ...state, 
-                    countries : filter
-                };
+                const activityFiltered = action.payload === 'All'
+                ? countriesActivities
+                : countriesActivities.filter((e) => e.Activities && e.Activities.find(a => a.name === action.payload))
+                
+                return{
+                    ...state,
+                    countries:activityFiltered,
+                    filterActivity:action.payload 
+                }
 
             case GET_COUNTRIES_QUERY :
                 return {
@@ -149,37 +150,7 @@ const reducer = (state = initialState, action) => {
                     countries : action.payload
                 }
 
-                // case FILTER_COUNTRIES:
-                //     return {
-                //         ...state,
-                //         countries:action.payload
-                //     }
-                    
-                    
-                    
-                    
-                    
-                    
-                    // const {activity, continent} = action.payload;
-                    // let filteredCountries= state.allCountries;
-                    // if(activity){
-                    //     filteredCountries=filteredCountries.filter(country => 
-                    //         country.Activities.some(act => act.name === activity)
-                    //     );
-                    // }
-                    // if(continent){
-                    //     filteredCountries=filteredCountries.filter(country => 
-                    //         country.continent === continent)
-                    // }
-
-                    // return{
-                    //     ...state,
-                    //     filteredCountries
-                    // }
-
-
                 
-
 
         default:
             return {...state}

@@ -10,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className ="App">
-        <Switch>
+        <Switch>   // se mueve solo dentro de las rutas que está envolviendo 
           <Route exact path = "/" component ={LandingPage}/>
           <Route exact path = "/home" component = {Home} />
           <Route exact path = "/activities" component = {CreateActivity}/>

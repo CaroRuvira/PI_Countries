@@ -58,7 +58,7 @@ const CountryDetail = (props) => {
                         })
                         : <p> No existen actividades para este país</p>
                     }
-                    {/* <Link to = "/activities"><button className={style.createact}>Crear Actividad</button></Link> */}
+                    
 
 
                 </div>

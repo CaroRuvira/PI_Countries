@@ -1,10 +1,9 @@
-import axios from "axios"
+import axios from "axios";
 import {
     GET_ACTIVITIES,
     GET_ALL_COUNTRIES,
     GET_COUNTRY_BY_NAME,
     GET_COUNTRY_DETAIL, 
-    ADD_ACTIVITY,
     FILTER_BY_ACTIVITIES,
     FILTER_BY_CONTINENTS,
     ORDER_COUNTRIES_ALF,
@@ -45,7 +44,6 @@ export const getCountries = () => {
  };
 
 export const postActivity =(payload) => {
-    console.log(payload)
     const activity= {
         name:payload.name,
         difficulty:payload.difficulty,

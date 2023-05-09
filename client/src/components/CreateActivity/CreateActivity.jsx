@@ -11,8 +11,7 @@ const validate = (input) => {
     let duration = Number(input.duration);
 
     if(!input.name) errors.name = 'Campo necesario';
-    else if(/[^A-Za-z0-9 ]+/g.test(input.name)) 
-    errors.name = 'El nombre no puede contener caracteres especiales ni tildes' // may, min,num,  no carac.espec, tildes 
+    else if (/[^A-Za-z0-9 ]+/g.test(input.name)) errors.name = 'El nombre no puede contener caracteres especiales ni tildes' // may, min,num,  no carac.espec, tildes 
      
     if (!input.difficulty) errors.difficulty = 'Campo necesario'
     else if (difficulty <= 0 || difficulty > 5) errors.difficulty = 'La dificultad debe ser un número entre 1 y 5';
@@ -33,7 +32,8 @@ const validate = (input) => {
  const CreateActivity = () => {
     const dispatch = useDispatch();
     const countries = useSelector((state) => state.countries);
-    const history = useHistory();
+    // const activities = useSelector((state) => state.allActivities)
+    const history = useHistory(); // hook para redirigir a home
     const [errors, setErrors] = useState({});
 
     const [input, setInput] = useState({
@@ -60,7 +60,7 @@ const validate = (input) => {
                 [event.target.name] : event.target.value
             })
         );
-        console.log(input)
+        // console.log(input)
     }
 
 
@@ -89,12 +89,20 @@ const validate = (input) => {
         })
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(input);
+    
         if(!input.name || !input.difficulty || !input.duration || !input.season || !input.countries){
             return alert ('Por favor complete el formulario antes de enviarlo')
-        }else{
+        } 
+        const allActivities = await fetch('http://localhost:3001/activities').then((res) => res.json());
+        const activityExist = allActivities.some((activity) => activity.name === input.name)
+        
+        if(activityExist){
+            return alert('Ya existe una actividad con ese nombre')
+        }
+        
+        
         dispatch(postActivity(input));
         alert ('Actividad creada');
         setInput({
@@ -105,7 +113,7 @@ const validate = (input) => {
             countries :[]
         })
         history.push("/home")
-    }
+    
     }
 
 
@@ -155,7 +163,6 @@ const validate = (input) => {
                         name="countries"
                         id="countries"
                         onChange={handleSelect}>
-                        {/* <option></option> */}
                         <option value="" disabled selected>Selecciona un país...</option>
                         {countries.sort((a, b) => a.name.localeCompare(b.name)).map((el) => (
                             <option value={el.name}>{el.name}</option>
@@ -227,20 +234,18 @@ const validate = (input) => {
                 {input.countries.map((el)=> (
                     <div className={style.conpais}>
                         <p className={style.mpais}>
-                        <img src={(countries.find(c => c.name === el)).flag} className={style.flag}></img>
+                        <img src={(countries.find(c => c.name === el)).flag} className={style.flag} alt='Imagen no encontrada'>
+
+                        </img>
                         <hr className={style.jump}></hr>
                        {el}
                         </p>
                         <hr className={style.jump}></hr>
                         <button 
                         className={style.buttonDelete}
-                        onClick= {()=> handleDelete(el)}> X{''}
+                        onClick= {()=> handleDelete(el)}> X {''}
                          
                         </button>
-                        {/* <img src={(countries.find(c => c.name === el)).flag} className={style.flag}></img> */}
-                       
-                        {/* <img>{(countries.find((country) => country.name === el).flag )}</img> */}
-
                     </div>
                 ))}
             </div>

@@ -6,9 +6,9 @@ import style from './LandingPage.module.css';
 const LandingPage = () => {
     return (
         <div className ={style.containerPrin}>
-            <div className={style.landing}>
+            <div >
               
-                <span className={style.text}>Bienvenido! Encuentra tu próximo destino!</span>
+                <span className={style.text}>Bienvenido... Encuentra tu próximo destino!</span>
                
 
                 <div className ={style.welcome}>

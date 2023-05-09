@@ -2,8 +2,9 @@ import React from "react";
 import style from './Paginado.module.css';
 
 const Paginado = ({countriesPerPage, allCountries, paginado, currentPage}) => {
-    const pageNumbers = []
-
+    const pageNumbers = [] // 
+   
+    //
     for(let i = 1; i <= Math.ceil(allCountries/countriesPerPage); i++){
         pageNumbers.push(i)
     }

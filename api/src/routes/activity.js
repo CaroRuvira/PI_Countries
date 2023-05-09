@@ -20,7 +20,8 @@ const postActivity = async (name, difficulty, duration, season, countries) => {
         });
         return newActivity.addCountry(selectCountries)
     } catch (error) {
-        console.log('No se pudo crear la actividad')
+        return {error : error.message}
+        // console.log('No se pudo crear la actividad')
     }
 };
 
@@ -29,7 +30,7 @@ const searchActivities = async () => {
         const getActivities = await Activity.findAll();
         return getActivities;
     } catch (error) {
-        console.log('No existen actividades')
+        throw new Error ('No existen actividades')
     }
 }
 
@@ -39,7 +40,7 @@ router.post('/activities', async (req, res) => {
         const newActivity = await postActivity(name, difficulty, duration, season, countries)
         res.status(201).send(newActivity)
     } catch (error) {
-        console.log('No se pudo crear la actividad')
+        return res.status(404).send('No se pudo crear la actividad')
     }
 });
 
